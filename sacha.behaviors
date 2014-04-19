@@ -1,0 +1,2 @@
+{:+ {:app [(:lt.objs.plugins/load-js "sacha_compiled.js")]
+     :sacha.hello [:lt.plugins.sacha/on-close-destroy]}}
