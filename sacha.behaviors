@@ -1,1 +1,4 @@
-{:+ {:app [(:lt.objs.plugins/load-js "sacha_compiled.js")]}}
+{:+ {:app [(:lt.objs.plugins/load-js "sacha_compiled.js")
+           (:lt.objs.plugins/load-keymap "sacha.keymap")]
+     :editor.otl [:lt.objs.editor/fold-gutter]
+     :files [(:lt.objs.files/file-types [{:name "otl" :exts [:otl] :mime "text/x-otl" :tags [:editor.otl]}])]}}
