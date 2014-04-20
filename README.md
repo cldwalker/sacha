@@ -28,7 +28,7 @@ is to insert two whitespaces. To configure a tab key to insert a tab or n white 
 `:lt.objs.editor/tab-settings` behavior. sacha will work with any tab-settings as long as they are
 consistently applied in one file. For caveats around this, see [Limitations](#limitations).
 
-sacha files end in `.otl`. This extension is needed for sacha's keybindings and possible future behaviors to take effect.
+sacha files end in `.otl`. This extension is needed for sacha's keybindings and behaviors to take effect.
 
 
 ## Commands
@@ -50,8 +50,8 @@ sacha's commands can be found in the command bar with the prefix `sacha: `. Most
 * `:sacha.fold-level-1` to `:sacha.fold-level-9`: Commands to fold up all branches to levels 1 - 9
 * `:sacha.fold-branch-one-level`: Folds current branch to be one level less than current folded level
 * `:sacha.unfold-branch-one-level`: Unfolds current branch to be one level more than current unfolded level
-* `:sacha.fold-all-branch`: Folds all children for current branch
-* `:sacha.unfold-all-branch`: Unfolds all children for current branch
+* `:sacha.fold-all-for-branch`: Folds all children for current branch
+* `:sacha.unfold-all-for-branch`: Unfolds all children for current branch
 
 ### Miscellaneous
 
@@ -83,6 +83,7 @@ The two major reasons are:
   command to find them.
 * Unindenting on a line with no text will cause the cursor to jump to the beginning of the line.
 * Moving a branch up or down and then undoing it can cause the cursor to jump just above/below the branch.
+* Nodes in a tree can only be a single line, no multi-line support.
 
 ## Bugs/Issues
 

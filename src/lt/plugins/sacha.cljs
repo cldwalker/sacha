@@ -6,9 +6,12 @@
 
 
 ;; Terminology
-;; indent - whitespace at beginning of each line
-;; level - outline level. Non-indented levels are level 1. Subsequent levels are
-;; one more tabSize indent than the previous line.
+;; indent:  whitespace at beginning of each line
+;; level:   outline level. Non-indented levels are level 1. Subsequent levels are
+;;          one more tabSize indent than the previous line.
+;; tree:    the whole outline
+;; node:    one line in a tree
+;; branch:  a node which has children
 
 ;; CodeMirror helpers - must take an editor object
 ;; ==================
@@ -117,7 +120,7 @@
                           (unfold-all ed #(< % indent))
                           (fold-all ed #(= % indent))))}))
 
-(defn unfold-one-level-for-current-tree []
+(defn unfold-branch-one-level []
   (let [ed (pool/last-active)
         current-line (.-line (editor/cursor ed))
         next-tree-line (safe-next-non-child-line ed current-line)
@@ -129,11 +132,11 @@
                   #(<= % next-indent)
                   (range current-line next-tree-line)))))
 
-(cmd/command {:command :sacha.unfold-one-level-for-current-tree
-              :desc "sacha: unfolds current tree one level"
-              :exec unfold-one-level-for-current-tree})
+(cmd/command {:command :sacha.unfold-branch-one-level
+              :desc "sacha: unfold current branch one level"
+              :exec unfold-branch-one-level})
 
-(defn fold-one-level-for-current-tree []
+(defn fold-branch-one-level []
   (let [ed (pool/last-active)
         current-line (.-line (editor/cursor ed))
         next-tree-line (safe-next-non-child-line ed current-line)
@@ -152,12 +155,12 @@
      #(>= % next-indent)
      (range current-line next-tree-line))))
 
-(cmd/command {:command :sacha.fold-one-level-for-current-tree
-              :desc "sacha: folds current tree one level"
-              :exec fold-one-level-for-current-tree})
+(cmd/command {:command :sacha.fold-branch-one-level
+              :desc "sacha: fold current branch one level"
+              :exec fold-branch-one-level})
 
-(cmd/command {:command :sacha.indent-fold
-              :desc "sacha: fold by indent"
+(cmd/command {:command :sacha.toggle-fold
+              :desc "sacha: toggle folding/unfolding the current branch"
               :exec (fn []
                       (let [ed (pool/last-active)]
                         (fold-code ed
@@ -180,7 +183,7 @@
               :desc "sacha: jump to parent"
               :exec jump-to-parent})
 
-(defn jump-forward-on-same-level []
+(defn jump-to-next-sibling []
   (let [ed (pool/last-active)
         line (.-line (editor/cursor ed))
         indent (line-indent ed line)]
@@ -190,11 +193,11 @@
       (editor/move-cursor ed {:line next-line :ch indent})
       (notifos/set-msg! "No next line found" {:class "error"}))))
 
-(cmd/command {:command :sacha.jump-forward-on-same-level
-              :desc "sacha: jump to next line on same level"
-              :exec jump-forward-on-same-level})
+(cmd/command {:command :sacha.jump-to-next-sibling
+              :desc "sacha: jump to next sibling"
+              :exec jump-to-next-sibling})
 
-(defn jump-backward-on-same-level []
+(defn jump-to-previous-sibling []
   (let [ed (pool/last-active)
         line (.-line (editor/cursor ed))
         indent (line-indent ed line)]
@@ -204,11 +207,11 @@
       (editor/move-cursor ed {:line prev-line :ch indent})
       (notifos/set-msg! "No previous line found" {:class "error"}))))
 
-(cmd/command {:command :sacha.jump-backward-on-same-level
-              :desc "sacha: jump to previous line on same level"
-              :exec jump-backward-on-same-level})
+(cmd/command {:command :sacha.jump-to-previous-sibling
+              :desc "sacha: jump to previous sibling"
+              :exec jump-to-previous-sibling})
 
-(defn select-current-tree []
+(defn select-branch []
   (let [ed (pool/last-active)
         line (.-line (editor/cursor ed))
         indent (line-indent ed line)
@@ -219,12 +222,12 @@
      {:line last-line
       :ch (editor/line-length ed last-line)})))
 
-;; handy for deleting, yanking, indent, outdenting
-(cmd/command {:command :sacha.select-current-tree
-              :desc "sacha: select current tree"
-              :exec select-current-tree})
+;; handy for delete, yank, indent, replace
+(cmd/command {:command :sacha.select-branch
+              :desc "sacha: select current branch"
+              :exec select-branch})
 
-(defn fold-fn-for-current-tree [fold-fn]
+(defn fold-fn-for-branch [fold-fn]
   (let [ed (pool/last-active)
         line (.-line (editor/cursor ed))
         indent (line-indent ed line)]
@@ -233,16 +236,16 @@
      (constantly true)
      (range line (safe-next-non-child-line ed line)))))
 
-(cmd/command {:command :sacha.fold-all-for-current-tree
-              :desc "sacha: fold all for current tree"
-              :exec (partial fold-fn-for-current-tree fold-all)})
+(cmd/command {:command :sacha.fold-all-for-branch
+              :desc "sacha: fold all for current branch"
+              :exec (partial fold-fn-for-branch fold-all)})
 
-(cmd/command {:command :sacha.unfold-all-for-current-tree
-              :desc "sacha: unfold all for current tree"
-              :exec (partial fold-fn-for-current-tree unfold-all)})
+(cmd/command {:command :sacha.unfold-all-for-branch
+              :desc "sacha: unfold all for current branch"
+              :exec (partial fold-fn-for-branch unfold-all)})
 
-(cmd/command {:command :sacha.outdent
-              :desc "sacha: Outdent by one level"
+(cmd/command {:command :sacha.unindent-node
+              :desc "sacha: unindent by one level"
               :exec (fn []
                       (let [ed (pool/last-active)]
                         (editor/indent-line ed (.-line (editor/cursor ed)) "subtract")))})
@@ -258,7 +261,7 @@
 ;; next-node-in-new-tree?. Don't do this until it's worth the effort
 ;; Note: better abstractions are needed here. Current code is hard to reason about and
 ;; too entangled
-(defn move-current-tree [direction]
+(defn move-branch [direction]
   (let [ed (pool/last-active)
         line (.-line (editor/cursor ed))
         indent (line-indent ed line)
@@ -292,28 +295,28 @@
                                                               (- (- current-line-ends line)))
                                                     :ch indent})))))))
 
-(cmd/command {:command :sacha.move-current-tree-down
-              :desc "sacha: Move current tree down"
-              :exec (partial move-current-tree :down)})
+(cmd/command {:command :sacha.move-branch-below-next-sibling
+              :desc "sacha: Move current branch below next sibling"
+              :exec (partial move-branch :down)})
 
 
-(cmd/command {:command :sacha.move-current-tree-up
-              :desc "sacha: Move current tree up"
-              :exec (partial move-current-tree :up)})
+(cmd/command {:command :sacha.move-branch-above-previous-sibling
+              :desc "sacha: Move current branch above previous sibling"
+              :exec (partial move-branch :up)})
 
-(defn indent-current-tree [direction]
+(defn indent-branch [direction]
   (let [ed (pool/last-active)]
-    (select-current-tree)
+    (select-branch)
     (editor/indent-selection ed direction)
     (clear-selection ed)))
 
-(cmd/command {:command :sacha.indent-selection
-              :desc "sacha: indents current selection"
-              :exec (partial indent-current-tree "add")})
+(cmd/command {:command :sacha.indent-branch
+              :desc "sacha: indent current branch"
+              :exec (partial indent-branch "add")})
 
-(cmd/command {:command :sacha.unindent-selection
-              :desc "sacha: unindents current selection"
-              :exec (partial indent-current-tree "subtract")})
+(cmd/command {:command :sacha.unindent-branch
+              :desc "sacha: unindent current branch"
+              :exec (partial indent-branch "subtract")})
 
 (defn find-disjointed-lines []
   (let [ed (pool/last-active)
