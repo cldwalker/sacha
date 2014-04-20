@@ -1,35 +1,57 @@
 ## Description
 
 sacha is an [outliner](http://en.wikipedia.org/wiki/Outliner) for Light Table.
-It comes with a full set of commands for folding/unfolding trees, changing their
-levels and moving branches around. sacha means tree in [Quechua](#http://en.wikipedia.org/wiki/Quechua_languages).
+It comes with a full set of commands for folding/unfolding branches, moving around
+in an outline and changing levels of branches. sacha means tree in [Quechua](#http://en.wikipedia.org/wiki/Quechua_languages).
+
+## Install
+
+Install this plugin with LT's plugin manager or clone this project to your LT
+plugins directory.
 
 ## Usage
 
-sacha comes with a full set of commands for creating and editing outlines. These commands can be found
-in the command bar with the prefix `sacha: `. sacha also comes with [keybindings](#TODO) for most of these commands.
-sacha files end in `.otl`.
+sacha is an outliner that delineates outline levels with tabs. Take for example this outline:
+
+```
+level-1
+  level-2.1
+  level-2.2
+    level-3
+another-level-1
+```
+
+This outline has two level 1 nodes, two level 2 nodes and one level 3 node. If we wanted to move
+`another-level-1` to be a child of `level-1`, we would insert a tab in front of it. If we wanted to do
+the reverse of this, we would unindent with `shift-tab`. When a tab key is pressed, LT's default behavior
+is to insert two whitespaces. To configure a tab key to insert a tab or n white spaces using LT's
+`:lt.objs.editor/tab-settings` behavior. sacha will work with any tab-settings as long as they are
+consistently applied in one file. For caveats around this, see [Limitations](#limitations).
+
+sacha files end in `.otl`. This extension is needed for sacha's keybindings and possible future behaviors to take effect.
 
 
-Here is a breakdown of sacha's commands:
+## Commands
 
+sacha's commands can be found in the command bar with the prefix `sacha: `. Most commands have [keybindings](#TODO).
 
 ### Basic
 
-* `:sacha.indent-node`: Indents the current node by one level
+* `:sacha.toggle-fold`: Toggle folding/unfolding the current branch
 * `:sacha.unindent-node`: Unindents the current node by one level
 * `:sacha.indent-branch`: Indents the current branch by one level
 * `:sacha.unindent-branch`: Unindents the current branch by one level
 * `:sacha.select-branch`: Selects the current branch. Useful in combination with delete, yank or replace.
 
-* Fold and Unfold
-  * `:sacha.fold-all`: Folds all branches to closed position
-  * `:sacha.unfold-all`: Unfolds all branches to open position
-  * `:sacha.fold-level-1` to `:sacha.fold-level-9`: Commands to unfold up to levels 1 - 9
-  * `:sacha.fold-branch-one-level`: Folds branch to be one level less than current folded level
-  * `:sacha.unfold-branch-one-level`: Unfolds branch to be one level more than current unfolded level
-  * `:sacha.fold-all-branch`: Folds all children for current branch
-  * `:sacha.unfold-all-branch`: Unfolds all children for current branch
+### Fold and Unfold
+
+* `:sacha.fold-all`: Folds all branches to closed position
+* `:sacha.unfold-all`: Unfolds all branches to open position
+* `:sacha.fold-level-1` to `:sacha.fold-level-9`: Commands to fold up all branches to levels 1 - 9
+* `:sacha.fold-branch-one-level`: Folds current branch to be one level less than current folded level
+* `:sacha.unfold-branch-one-level`: Unfolds current branch to be one level more than current unfolded level
+* `:sacha.fold-all-branch`: Folds all children for current branch
+* `:sacha.unfold-all-branch`: Unfolds all children for current branch
 
 ### Miscellaneous
 
