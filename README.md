@@ -4,6 +4,8 @@ sacha is an [outliner](http://en.wikipedia.org/wiki/Outliner) for Light Table.
 It comes with a full set of commands for folding/unfolding branches, moving around
 in an outline and changing levels of branches. sacha means tree in [Quechua](#http://en.wikipedia.org/wiki/Quechua_languages).
 
+![Usage Example](example.gif)
+
 ## Install
 
 Install this plugin with LT's plugin manager or clone this project to your LT
