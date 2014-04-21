@@ -35,7 +35,7 @@ sacha files end in `.otl`. This extension is needed for sacha's keybindings and 
 
 ## Commands
 
-sacha's commands can be found in the command bar with the prefix `sacha: `. Most commands have [keybindings](#TODO).
+sacha's commands can be found in the command bar with the prefix `sacha: `. Most commands have [keybindings](./sacha.keymap).
 
 ### Basic
 
@@ -63,7 +63,7 @@ sacha's commands can be found in the command bar with the prefix `sacha: `. Most
 * `:sacha.move-branch-above-previous-sibling`: Move current branch to be before the previous sibling
 * `:sacha.move-branch-below-next-sibling`: Move current branch to be after the next sibling
 
-Multiple LT commands can be combined into one keystroke. For example, sacha provides [a keystroke](#TODO) to fold up to the parent using two of the above commands.
+Multiple LT commands can be combined into one keystroke. For example, sacha provides [a keystroke](https://github.com/cldwalker/sacha/blob/e38cfdac8692b8e8febdaceea6a67e480c0ab410/sacha.keymap#L10) to fold up to the parent using two of the above commands.
 
 Note: if you're looking for other editing functions, remember Light Table has both [vim](https://github.com/LightTable/Vim) and [emacs](https://github.com/LightTable/Emacs) keybindings.
 
