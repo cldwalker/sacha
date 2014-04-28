@@ -4,9 +4,12 @@
 
 
 (defn fold-code
-  "Like editor/fold-code but handles all args to .foldCode and doesn't assume current cursor"
-  [ed pos opts force]
-  (.foldCode (editor/->cm-ed ed) pos opts force))
+  "Like editor/fold-code but allows all args to .foldCode, doesn't assume current
+  cursor and defaults :rangeFinder to fold.indent"
+  ([ed pos force]
+   (fold-code ed pos #js {:rangeFinder js/CodeMirror.fold.indent} force))
+  ([ed pos opts force]
+   (.foldCode (editor/->cm-ed ed) pos opts force)))
 
 ;; from https://groups.google.com/forum/#!searchin/codemirror/foldall/codemirror/u3IYL-5g0t4/4YGdXEBFgZoJ
 (defn fold-all
@@ -17,10 +20,7 @@
                      (fn []
                        (doseq [line lines]
                          (when (condition (line-indent ed line))
-                           (fold-code ed
-                                      #js {:line line :ch 0}
-                                      #js {:rangeFinder js/CodeMirror.fold.indent}
-                                      "fold")))))))
+                           (fold-code ed #js {:line line :ch 0} "fold")))))))
 
 (defn unfold-all
   ([ed condition]
@@ -30,10 +30,7 @@
                      (fn []
                        (doseq [line lines]
                          (when (condition (line-indent ed line))
-                           (fold-code ed
-                                      #js {:line line :ch 0}
-                                      #js {:rangeFinder js/CodeMirror.fold.indent}
-                                      "unfold")))))))
+                           (fold-code ed #js {:line line :ch 0} "unfold")))))))
 
 
 ;; same as getIndent() embedded in fold.indent

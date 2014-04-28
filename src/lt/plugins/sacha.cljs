@@ -20,10 +20,7 @@
               :desc "sacha: toggle folding/unfolding the current branch"
               :exec (fn []
                       (let [ed (pool/last-active)]
-                        (c/fold-code ed
-                                   (editor/cursor ed)
-                                   #js {:rangeFinder js/CodeMirror.fold.indent}
-                                   nil)))})
+                        (c/fold-code ed (editor/cursor ed) nil)))})
 
 (cmd/command {:command :sacha.unindent-node
               :desc "sacha: unindent by one level"
