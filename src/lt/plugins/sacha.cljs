@@ -26,7 +26,8 @@
               :desc "sacha: unindent by one level"
               :exec (fn []
                       (let [ed (pool/last-active)]
-                        (editor/indent-line ed (.-line (editor/cursor ed)) "subtract")))})
+                        ;; would use editor/indent-line if it supported last arg
+                        (.indentLine (editor/->cm-ed ed) (.-line (editor/cursor ed)) "subtract" true)))})
 
 (defn select-branch []
   (let [ed (pool/last-active)
