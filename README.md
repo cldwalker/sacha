@@ -77,13 +77,18 @@ The two major reasons are:
 * There are very few outliners written in higher-level languages. By writing sacha in js/cljs I want to enable
   myself and others to explore new ways of improving outlining without having to dip into viml, elisp or C.
 
+## Tips
+
+* If you're using LT >= 0.6.6 and vim, there are built-in vim keystrokes to help with indented
+  pasting. This is useful in outlining to copy or move nodes around with ease. '[p' pastes above at
+  current indent level and ']p' pastes below at current indent level. This works for multiple lines.
+
 ## Limitations
 
 * sacha should only be used on files with a consistent indent scheme. For example, changing your tabSize from 2 to 4
   midway through a file will muck with outline levels. Likewise, files that have a mix of tabs and whitespaces for
   indents will cause levels to be off. If you suspect your file has such lines, use the `:sacha.find-malformed-lines`
   command to find them.
-* Unindenting on a line with no text will cause the cursor to jump to the beginning of the line.
 * Moving a branch up or down and then undoing it can cause the cursor to jump just above/below the branch.
 * Nodes in a tree can only be a single line, no multi-line support.
 
