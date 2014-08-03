@@ -62,6 +62,8 @@ sacha's commands can be found in the command bar with the prefix `sacha: `. Most
 * `:sacha.jump-to-previous-sibling`: Jump cursor to previous sibling (even across branches)
 * `:sacha.move-branch-above-previous-sibling`: Move current branch to be before the previous sibling
 * `:sacha.move-branch-below-next-sibling`: Move current branch to be after the next sibling
+* `:sacha.zoom-branch`: Zoom/hoist current branch to another tab.
+* `:sacha.raise-branch`: Raise current branch to replace parent.
 
 Multiple LT commands can be combined into one keystroke. For example, sacha provides [a keystroke](https://github.com/cldwalker/sacha/blob/e38cfdac8692b8e8febdaceea6a67e480c0ab410/sacha.keymap#L10) to fold up to the parent using two of the above commands.
 
@@ -91,6 +93,8 @@ The two major reasons are:
   command to find them.
 * Moving a branch up or down and then undoing it can cause the cursor to jump just above/below the branch.
 * Nodes in a tree can only be a single line, no multi-line support.
+* Zoom: can't save zoomed file - must save original file. Zoomed view shows original levels. It
+  would be non-trivial to keep files in sync while showing files at different levels.
 
 ## Bugs/Issues
 
