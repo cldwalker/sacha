@@ -84,3 +84,8 @@
   [ed from to]
   (.replaceRange (editor/->cm-ed ed)
                  "" #js {:line from :ch 0} #js {:line (inc to) :ch 0}))
+
+(defn find-parent-line
+  "Finds parent line for given line"
+  [ed line]
+  (find-parent ed (range (dec line) -1 -1) (line-indent ed line)))

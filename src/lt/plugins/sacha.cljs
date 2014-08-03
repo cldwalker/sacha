@@ -146,8 +146,7 @@
   (let [ed (pool/last-active)
         line (.-line (editor/cursor ed))
         indent (c/line-indent ed line)]
-    (if-let [parent-line (c/find-parent
-                          ed (range (dec line) -1 -1) indent)]
+    (if-let [parent-line (c/find-parent-line ed line)]
       ;; assume parent is one level less though this isn't true for disjointed outlines
       (editor/move-cursor ed {:line parent-line
                               :ch (- indent (editor/option ed "tabSize"))})
@@ -261,3 +260,13 @@
 (cmd/command {:command :sacha.zoom-current-branch
               :desc "sacha: Zoom/hoist current branch into a separate tab"
               :exec zoom-current-branch})
+
+(cmd/command {:command :sacha.raise-branch
+              :desc "sacha: Raises branch to replace parent and sets it to parent's level"
+              :exec (fn []
+                      (let [ed (pool/last-active)
+                            parent-line (c/find-parent-line ed (.-line (editor/cursor ed)))]
+                        (editor/operation ed
+                                          (fn []
+                                            (c/delete-lines ed parent-line parent-line)
+                                            (indent-branch "subtract")))))})
