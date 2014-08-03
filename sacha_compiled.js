@@ -329,17 +329,17 @@ lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new
 lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.unfold-all","sacha.unfold-all",4075208000),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: unfold the whole file",new cljs.core.Keyword(null,"exec","exec",1017031683),(function (){return lt.plugins.sacha.codemirror.unfold_all.call(null,lt.objs.editor.pool.last_active.call(null),cljs.core.constantly.call(null,true));
 })], null));
 lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.fold-to-level","sacha.fold-to-level",2456167184),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: fold up to given level",new cljs.core.Keyword(null,"exec","exec",1017031683),(function (level){var ed = lt.objs.editor.pool.last_active.call(null);var tabsize = lt.objs.editor.option.call(null,ed,"tabSize");var indent = ((level - 1) * tabsize);lt.plugins.sacha.codemirror.unfold_all.call(null,ed,((function (ed,tabsize,indent){
-return (function (p1__8182_SHARP_){return (p1__8182_SHARP_ < indent);
+return (function (p1__8331_SHARP_){return (p1__8331_SHARP_ < indent);
 });})(ed,tabsize,indent))
 );
 return lt.plugins.sacha.codemirror.fold_all.call(null,ed,((function (ed,tabsize,indent){
-return (function (p1__8183_SHARP_){return cljs.core._EQ_.call(null,p1__8183_SHARP_,indent);
+return (function (p1__8332_SHARP_){return cljs.core._EQ_.call(null,p1__8332_SHARP_,indent);
 });})(ed,tabsize,indent))
 );
 })], null));
 lt.plugins.sacha.unfold_branch_one_level = (function unfold_branch_one_level(){var ed = lt.objs.editor.pool.last_active.call(null);var current_line = lt.objs.editor.cursor.call(null,ed).line;var next_tree_line = lt.plugins.sacha.codemirror.safe_next_non_child_line.call(null,ed,current_line);var first_folded_line = lt.plugins.sacha.codemirror.find_first_folded_line.call(null,ed,cljs.core.range.call(null,current_line,next_tree_line));var next_indent = (cljs.core.truth_(first_folded_line)?lt.plugins.sacha.codemirror.line_indent.call(null,ed,(first_folded_line - 1)):null);if(cljs.core.truth_(first_folded_line))
 {return lt.plugins.sacha.codemirror.unfold_all.call(null,ed,((function (ed,current_line,next_tree_line,first_folded_line,next_indent){
-return (function (p1__8184_SHARP_){return (p1__8184_SHARP_ <= next_indent);
+return (function (p1__8333_SHARP_){return (p1__8333_SHARP_ <= next_indent);
 });})(ed,current_line,next_tree_line,first_folded_line,next_indent))
 ,cljs.core.range.call(null,current_line,next_tree_line));
 } else
@@ -348,10 +348,10 @@ return (function (p1__8184_SHARP_){return (p1__8184_SHARP_ <= next_indent);
 });
 lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.unfold-branch-one-level","sacha.unfold-branch-one-level",759984983),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: unfold current branch one level",new cljs.core.Keyword(null,"exec","exec",1017031683),lt.plugins.sacha.unfold_branch_one_level], null));
 lt.plugins.sacha.fold_branch_one_level = (function fold_branch_one_level(){var ed = lt.objs.editor.pool.last_active.call(null);var current_line = lt.objs.editor.cursor.call(null,ed).line;var next_tree_line = lt.plugins.sacha.codemirror.safe_next_non_child_line.call(null,ed,current_line);var first_folded_line = lt.plugins.sacha.codemirror.find_first_folded_line.call(null,ed,cljs.core.range.call(null,current_line,next_tree_line));var folded_indent = (cljs.core.truth_(first_folded_line)?lt.plugins.sacha.codemirror.line_indent.call(null,ed,(first_folded_line - 1)):cljs.core.apply.call(null,cljs.core.max,cljs.core.map.call(null,((function (ed,current_line,next_tree_line,first_folded_line){
-return (function (p1__8185_SHARP_){return lt.plugins.sacha.codemirror.line_indent.call(null,ed,p1__8185_SHARP_);
+return (function (p1__8334_SHARP_){return lt.plugins.sacha.codemirror.line_indent.call(null,ed,p1__8334_SHARP_);
 });})(ed,current_line,next_tree_line,first_folded_line))
 ,cljs.core.range.call(null,current_line,next_tree_line))));var next_indent = (folded_indent - lt.objs.editor.option.call(null,ed,"tabSize"));return lt.plugins.sacha.codemirror.fold_all.call(null,ed,((function (ed,current_line,next_tree_line,first_folded_line,folded_indent,next_indent){
-return (function (p1__8186_SHARP_){return (p1__8186_SHARP_ >= next_indent);
+return (function (p1__8335_SHARP_){return (p1__8335_SHARP_ >= next_indent);
 });})(ed,current_line,next_tree_line,first_folded_line,folded_indent,next_indent))
 ,cljs.core.range.call(null,current_line,next_tree_line));
 });
@@ -401,24 +401,24 @@ return lt.objs.editor.move_cursor.call(null,ed,new cljs.core.PersistentArrayMap(
 lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.move-branch-below-next-sibling","sacha.move-branch-below-next-sibling",661278437),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: Move current branch below next sibling",new cljs.core.Keyword(null,"exec","exec",1017031683),cljs.core.partial.call(null,lt.plugins.sacha.move_branch,new cljs.core.Keyword(null,"down","down",1016993812))], null));
 lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.move-branch-above-previous-sibling","sacha.move-branch-above-previous-sibling",3178376061),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: Move current branch above previous sibling",new cljs.core.Keyword(null,"exec","exec",1017031683),cljs.core.partial.call(null,lt.plugins.sacha.move_branch,new cljs.core.Keyword(null,"up","up",1013907981))], null));
 lt.plugins.sacha.find_disjointed_lines = (function find_disjointed_lines(){var ed = lt.objs.editor.pool.last_active.call(null);var tabsize = lt.objs.editor.option.call(null,ed,"tabSize");return cljs.core.remove.call(null,((function (ed,tabsize){
-return (function (p1__8188_SHARP_){var or__6364__auto__ = (new cljs.core.Keyword(null,"difference","difference",2742266031).cljs$core$IFn$_invoke$arity$1(p1__8188_SHARP_) < 0);if(or__6364__auto__)
+return (function (p1__8337_SHARP_){var or__6364__auto__ = (new cljs.core.Keyword(null,"difference","difference",2742266031).cljs$core$IFn$_invoke$arity$1(p1__8337_SHARP_) < 0);if(or__6364__auto__)
 {return or__6364__auto__;
 } else
-{return cljs.core.PersistentHashSet.fromArray([0,tabsize], true).call(null,new cljs.core.Keyword(null,"difference","difference",2742266031).cljs$core$IFn$_invoke$arity$1(p1__8188_SHARP_));
+{return cljs.core.PersistentHashSet.fromArray([0,tabsize], true).call(null,new cljs.core.Keyword(null,"difference","difference",2742266031).cljs$core$IFn$_invoke$arity$1(p1__8337_SHARP_));
 }
 });})(ed,tabsize))
 ,cljs.core.map.call(null,((function (ed,tabsize){
-return (function (p__8191){var vec__8192 = p__8191;var line1 = cljs.core.nth.call(null,vec__8192,0,null);var line2 = cljs.core.nth.call(null,vec__8192,1,null);return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"lines","lines",1116881521),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"line","line",1017226086).cljs$core$IFn$_invoke$arity$1(line1),new cljs.core.Keyword(null,"line","line",1017226086).cljs$core$IFn$_invoke$arity$1(line2)], null),new cljs.core.Keyword(null,"difference","difference",2742266031),(new cljs.core.Keyword(null,"indent","indent",4124632094).cljs$core$IFn$_invoke$arity$1(line2) - new cljs.core.Keyword(null,"indent","indent",4124632094).cljs$core$IFn$_invoke$arity$1(line1))], null);
+return (function (p__8340){var vec__8341 = p__8340;var line1 = cljs.core.nth.call(null,vec__8341,0,null);var line2 = cljs.core.nth.call(null,vec__8341,1,null);return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"lines","lines",1116881521),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"line","line",1017226086).cljs$core$IFn$_invoke$arity$1(line1),new cljs.core.Keyword(null,"line","line",1017226086).cljs$core$IFn$_invoke$arity$1(line2)], null),new cljs.core.Keyword(null,"difference","difference",2742266031),(new cljs.core.Keyword(null,"indent","indent",4124632094).cljs$core$IFn$_invoke$arity$1(line2) - new cljs.core.Keyword(null,"indent","indent",4124632094).cljs$core$IFn$_invoke$arity$1(line1))], null);
 });})(ed,tabsize))
 ,cljs.core.partition.call(null,2,1,cljs.core.map.call(null,((function (ed,tabsize){
-return (function (p1__8187_SHARP_){return cljs.core.PersistentHashMap.fromArrays.call(null,[new cljs.core.Keyword(null,"line","line",1017226086),new cljs.core.Keyword(null,"indent","indent",4124632094)],[p1__8187_SHARP_,lt.plugins.sacha.codemirror.line_indent.call(null,ed,p1__8187_SHARP_)]);
+return (function (p1__8336_SHARP_){return cljs.core.PersistentHashMap.fromArrays.call(null,[new cljs.core.Keyword(null,"line","line",1017226086),new cljs.core.Keyword(null,"indent","indent",4124632094)],[p1__8336_SHARP_,lt.plugins.sacha.codemirror.line_indent.call(null,ed,p1__8336_SHARP_)]);
 });})(ed,tabsize))
 ,cljs.core.range.call(null,lt.objs.editor.first_line.call(null,ed),(lt.objs.editor.last_line.call(null,ed) + 1))))));
 });
 lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.find-malformed-lines","sacha.find-malformed-lines",982046763),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: find lines with malformed levels caused by incorrect indents",new cljs.core.Keyword(null,"exec","exec",1017031683),cljs.core.comp.call(null,cljs.core.prn,lt.plugins.sacha.find_disjointed_lines)], null));
-lt.plugins.sacha.zoom_current_branch = (function zoom_current_branch(){var ed = lt.objs.editor.pool.last_active.call(null);var line = lt.objs.editor.cursor.call(null,ed).line;var last_line = (lt.plugins.sacha.codemirror.safe_next_non_child_line.call(null,ed,line) - 1);return lt.plugins.sacha.util.open_linked_doc.call(null,ed,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"from","from",1017056028),line,new cljs.core.Keyword(null,"to","to",1013907949),last_line], null));
+lt.plugins.sacha.zoom_branch = (function zoom_branch(){var ed = lt.objs.editor.pool.last_active.call(null);var line = lt.objs.editor.cursor.call(null,ed).line;var last_line = (lt.plugins.sacha.codemirror.safe_next_non_child_line.call(null,ed,line) - 1);return lt.plugins.sacha.util.open_linked_doc.call(null,ed,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"from","from",1017056028),line,new cljs.core.Keyword(null,"to","to",1013907949),last_line], null));
 });
-lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.zoom-current-branch","sacha.zoom-current-branch",506969794),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: Zoom/hoist current branch into a separate tab",new cljs.core.Keyword(null,"exec","exec",1017031683),lt.plugins.sacha.zoom_current_branch], null));
+lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.zoom-branch","sacha.zoom-branch",2484139502),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: Zoom/hoist current branch into a separate tab",new cljs.core.Keyword(null,"exec","exec",1017031683),lt.plugins.sacha.zoom_branch], null));
 lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"sacha.raise-branch","sacha.raise-branch",3792966773),new cljs.core.Keyword(null,"desc","desc",1016984067),"sacha: Raises branch to replace parent and sets it to parent's level",new cljs.core.Keyword(null,"exec","exec",1017031683),(function (){var ed = lt.objs.editor.pool.last_active.call(null);var parent_line = lt.plugins.sacha.codemirror.find_parent_line.call(null,ed,lt.objs.editor.cursor.call(null,ed).line);return lt.objs.editor.operation.call(null,ed,((function (ed,parent_line){
 return (function (){lt.plugins.sacha.codemirror.delete_lines.call(null,ed,parent_line,parent_line);
 return lt.plugins.sacha.indent_branch.call(null,"subtract");
