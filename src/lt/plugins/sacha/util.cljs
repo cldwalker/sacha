@@ -34,7 +34,7 @@
      (object/update! doc [:sub-docs] conj neue))))
 
 (defn open-linked-doc
-  "Creates a linked doc from the given editor and linked doc (http://codemirror.net/doc/manual.html#linkedDoc)
+  "Creates a linked doc from the given editor and linkedDoc (http://codemirror.net/doc/manual.html#linkedDoc)
   options and opens it in a new tab. Assumes a subview of the original doc is to be created."
   [ed ldoc-opts]
   (create-sub (:doc @ed) ldoc-opts)

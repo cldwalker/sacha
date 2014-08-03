@@ -3,7 +3,8 @@
             [lt.objs.editor.pool :as pool]
             [lt.objs.notifos :as notifos]
             [lt.objs.editor :as editor]
-            [lt.plugins.sacha.codemirror :as c]))
+            [lt.plugins.sacha.codemirror :as c]
+            [lt.plugins.sacha.util :as util]))
 
 ;; Terminology
 ;; indent:  whitespace at beginning of each line
@@ -250,3 +251,13 @@
 (cmd/command {:command :sacha.find-malformed-lines
               :desc "sacha: find lines with malformed levels caused by incorrect indents"
               :exec (comp prn find-disjointed-lines)})
+
+(defn zoom-current-branch []
+  (let [ed (pool/last-active)
+        line (.-line (editor/cursor ed))
+        last-line (dec (c/safe-next-non-child-line ed line))]
+    (util/open-linked-doc ed {:from line :to last-line})))
+
+(cmd/command {:command :sacha.zoom-current-branch
+              :desc "sacha: Zoom/hoist current branch into a separate tab"
+              :exec zoom-current-branch})

@@ -6,6 +6,7 @@
                   "alt-k" [:sacha.move-branch-above-previous-sibling]
                   "alt-h" [:sacha.unindent-branch]
                   "alt-l" [:sacha.indent-branch]
+                  "alt-z" [:sacha.zoom-current-branch]
                   "cmd-u" [:sacha.jump-to-parent]
                   "cmd-shift-u" [:sacha.jump-to-parent :sacha.toggle-fold] ; fold parent
                   "cmd-." [:sacha.select-branch]
