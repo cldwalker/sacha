@@ -254,7 +254,7 @@
 (defn zoom-branch []
   (let [ed (pool/last-active)
         line (.-line (editor/cursor ed))
-        last-line (dec (c/safe-next-non-child-line ed line))]
+        last-line (c/safe-next-non-child-line ed line)]
     (util/open-linked-doc ed {:from line :to last-line})))
 
 (cmd/command {:command :sacha.zoom-branch
